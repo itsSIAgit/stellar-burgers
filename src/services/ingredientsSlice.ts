@@ -10,7 +10,7 @@ type TIngredientsData = {
 
 const initialState: TIngredientsData = {
   isIngredientsError: false,
-  isIngredientsLoading: true,
+  isIngredientsLoading: false,
   ingredients: []
 };
 
@@ -40,6 +40,7 @@ export const ingredientsSlice = createSlice({
         state.isIngredientsLoading = true;
       })
       .addCase(getIngredientsFromServer.rejected, (state) => {
+        state.isIngredientsLoading = false;
         state.isIngredientsError = true;
       })
       .addCase(getIngredientsFromServer.fulfilled, (state, action) => {

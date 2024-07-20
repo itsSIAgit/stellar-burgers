@@ -6,23 +6,13 @@ import { BurgerIngredients, Modal } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
-import {
-  getIsIngredientsError,
-  getIsIngredientsLoading
-} from '../../services/ingredientsSlice';
+import { getIsIngredientsLoading } from '../../services/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
   const isIngredientsLoading: boolean = useSelector(getIsIngredientsLoading);
-  const isIngredientsError: boolean = useSelector(getIsIngredientsError);
 
   return (
     <>
-      {isIngredientsError ? (
-        <Modal title={'Ошибка'} onClose={() => window.location.reload()}>
-          <p>Ошибка первичной загрузки.</p>
-          <p>Попробуйте перезагрузить страницу.</p>
-        </Modal>
-      ) : null}
       {isIngredientsLoading ? (
         <Preloader />
       ) : (
