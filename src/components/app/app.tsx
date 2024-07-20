@@ -13,69 +13,80 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from '../../services/store';
+import { useEffect } from 'react';
+import { getIngredientsFromServer } from '../../services/ingredientsSlice';
 
-const App = () => (
-  <div className={styles.app}>
-    <AppHeader />
-    <Routes>
-      <Route path='/' element={<ConstructorPage />} />
-      <Route path='*' element={<NotFound404 />} />
-      <Route path='/feed' element={<Feed />} />
+const App = () => {
+  const location = useLocation();
+  const backgroundLocation = location.state?.background;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-      {/* Защищенные роуты: юзер залогинен */}
-      <Route path='/profile' element={<Profile />} />
-      <Route path='/profile/orders' element={<ProfileOrders />} />
+  useEffect(() => {
+    dispatch(getIngredientsFromServer());
+  }, []);
 
-      {/* Защищенные роуты: залогиненный не должен попасть */}
-      <Route path='/login' element={<Login />} />
-      <Route path='/register' element={<Register />} />
-      <Route path='/forgot-password' element={<ForgotPassword />} />
-      <Route path='/reset-password' element={<ResetPassword />} />
+  return (
+    <div className={styles.app}>
+      <AppHeader />
+      <Routes location={backgroundLocation || location}>
+        <Route path='/' element={<ConstructorPage />} />
+        <Route path='*' element={<NotFound404 />} />
+        <Route path='/feed' element={<Feed />} />
+        <Route
+          path='/ingredients/:id'
+          element={
+            <main className={styles.detailPageWrap}>
+              <IngredientDetails />
+            </main>
+          }
+        />
 
-      {/* Модалки */}
-      <Route
-        path='/feed/:number'
-        element={
-          <Modal
-            title={''}
-            onClose={function (): void {
-              throw new Error('Function not implemented.');
-            }}
-          >
-            <OrderInfo />{' '}
-          </Modal>
-        }
-      />
-      <Route
-        path='/ingredients/:id'
-        element={
-          <Modal
-            title={''}
-            onClose={function (): void {
-              throw new Error('Function not implemented.');
-            }}
-          >
-            <IngredientDetails />{' '}
-          </Modal>
-        }
-      />
-      {/* Защищенные модалки */}
-      <Route
-        path='/profile/orders/:number'
-        element={
-          <Modal
-            title={''}
-            onClose={function (): void {
-              throw new Error('Function not implemented.');
-            }}
-          >
-            <OrderInfo />{' '}
-          </Modal>
-        }
-      />
-    </Routes>
-  </div>
-);
+        {/* Защищенные роуты: юзер залогинен */}
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/orders' element={<ProfileOrders />} />
+
+        {/* Защищенные роуты: залогиненный не должен попасть */}
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
+      </Routes>
+
+      {backgroundLocation && (
+        <Routes>
+          {/* Модалки */}
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal title={''} onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title={'Подробное описание'} onClose={() => navigate(-1)}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+          {/* Защищенные модалки */}
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title={''} onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+    </div>
+  );
+};
 
 export default App;
