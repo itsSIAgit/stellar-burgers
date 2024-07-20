@@ -13,8 +13,8 @@ import {
 } from '../../services/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
-  const isIngredientsLoading = useSelector(getIsIngredientsLoading);
-  const isIngredientsError = useSelector(getIsIngredientsError);
+  const isIngredientsLoading: boolean = useSelector(getIsIngredientsLoading);
+  const isIngredientsError: boolean = useSelector(getIsIngredientsError);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getIngredientsFromServer());
