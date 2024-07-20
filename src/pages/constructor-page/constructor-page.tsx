@@ -1,18 +1,33 @@
-import { useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 
 import styles from './constructor-page.module.css';
 
-import { BurgerIngredients } from '../../components';
+import { BurgerIngredients, Modal } from '../../components';
 import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import {
+  getIngredientsFromServer,
+  getIsIngredientsError,
+  getIsIngredientsLoading
+} from '../../services/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
-  /** TODO: взять переменную из стора */
-  const isIngredientsLoading = false;
+  const isIngredientsLoading = useSelector(getIsIngredientsLoading);
+  const isIngredientsError = useSelector(getIsIngredientsError);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getIngredientsFromServer());
+  }, []);
 
   return (
     <>
+      {isIngredientsError ? (
+        <Modal title={'Ошибка'} onClose={() => window.location.reload()}>
+          <p>Ошибка первичной загрузки.</p>
+          <p>Попробуйте перезагрузить страницу.</p>
+        </Modal>
+      ) : null}
       {isIngredientsLoading ? (
         <Preloader />
       ) : (
