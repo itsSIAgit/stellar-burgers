@@ -25,7 +25,7 @@ import {
   getOrdersFromServer
 } from '../../services/ordersSlice';
 import {
-  clearAuthError,
+  setHaveAuthError,
   getHaveAuthError
 } from '../../services/auth/authSlice';
 import { checkAuth } from '../../services/auth/actions';
@@ -73,7 +73,7 @@ const App = () => {
         <Modal
           title={'Ошибка'}
           onClose={() => {
-            dispatch(clearAuthError());
+            dispatch(setHaveAuthError(false));
           }}
         >
           <p>Операция не удалась.</p>

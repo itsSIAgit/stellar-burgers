@@ -18,6 +18,7 @@ export const Register: FC = () => {
       password: password
     };
     dispatch(register(registerData));
+    setPassword('');
   };
 
   return (

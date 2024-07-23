@@ -19,15 +19,49 @@ export const login = createAsyncThunk(
   async (data: TLoginData) => await loginUserApi(data)
 );
 
+//! Надо перекинуть на страницу входа
 export const logout = createAsyncThunk(
   'auth/logout',
-  async () => await logoutApi() //! При успехе удалить запись в куке и локал-стораж
+  async () => await logoutApi()
+  // async (_, { dispatch }) => {
+  //   console.log('СЕТЕВОЙ ЛОГАУТ ВЫЗВАН');
+
+  //   await logoutApi()
+  //     .then((res) => {
+  //       console.log(res);
+  //       dispatch(setUser(null));
+  //       deleteCookie('accessToken');
+  //       localStorage.removeItem('refreshToken');
+  //     })
+  //     .catch(() => dispatch(setHaveAuthError(true)));
+  // }
 );
 
 //Работает
 export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
   async () => await getUserApi()
+  // async (_, { dispatch }) => {
+  //   console.log('== checkAuth ==');
+  //   console.log(getCookie('accessToken'));
+
+  //   if (getCookie('accessToken')) {
+  //     dispatch(setIsAuthLoading(true));
+  //     dispatch(setHaveAuthError(false));
+  //     await getUserApi()
+  //       .then((res) => dispatch(setUser(res.user)))
+  //       .catch(() => {
+  //         console.log('ERROR');
+  //         dispatch(setUser(null));
+  //         deleteCookie('accessToken');
+  //         localStorage.removeItem('refreshToken');
+  //       })
+  //       .finally(() => {
+  //         dispatch(setIsAuthLoading(false));
+  //         dispatch(setIsAuthChecked(true));
+  //       });
+  //   }
+  // }
 );
 
 export const keepTokenActual = createAsyncThunk(
@@ -52,6 +86,7 @@ export const forgotPassword = createAsyncThunk(
   async (data: { email: string }) => await forgotPasswordApi(data)
 );
 
+//! Не нужно асинхронно
 export const resetPassword = createAsyncThunk(
   'auth/resetPassword',
   async (data: { password: string; token: string }) =>
