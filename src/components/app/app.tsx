@@ -24,29 +24,60 @@ import {
   getIsOrdersError,
   getOrdersFromServer
 } from '../../services/ordersSlice';
+import {
+  clearAuthError,
+  getHaveAuthError
+} from '../../services/auth/authSlice';
+import { checkAuth } from '../../services/auth/actions';
 
 const App = () => {
   const location = useLocation();
   const backgroundLocation = location.state?.background;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const haveErrorLoading = [
     useSelector(getIsIngredientsError),
     useSelector(getIsOrdersError)
   ].some((err) => err === true);
 
+  const haveAuthError = useSelector(getHaveAuthError);
+
   useEffect(() => {
     dispatch(getIngredientsFromServer());
     dispatch(getOrdersFromServer());
+    dispatch(checkAuth());
   }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
+
+      {/* Покажем критическую ошибку, при которой
+          позволять пользователю дальше тыкать не стоит */}
       {haveErrorLoading ? (
-        <Modal title={'Ошибка'} onClose={() => window.location.reload()}>
-          <p>Ошибка загрузки.</p>
+        <Modal
+          title={'Ошибка'}
+          onClose={() => {
+            window.location.reload();
+          }}
+        >
+          <p>Важные данные загрузить не удалось.</p>
           <p>Попробуйте перезагрузить страницу.</p>
+        </Modal>
+      ) : null}
+
+      {/* Покажем уведомление об ошибке auth и сбросим,
+          чтобы показать один раз, и позволить пользователю дальше тыкать */}
+      {haveAuthError ? (
+        <Modal
+          title={'Ошибка'}
+          onClose={() => {
+            dispatch(clearAuthError());
+          }}
+        >
+          <p>Операция не удалась.</p>
+          <p>Попробуйте снова.</p>
         </Modal>
       ) : null}
 
