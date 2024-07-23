@@ -29,6 +29,7 @@ import {
   getHaveAuthError
 } from '../../services/auth/authSlice';
 import { checkAuth } from '../../services/auth/actions';
+import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 
 const App = () => {
   const location = useLocation();
@@ -47,6 +48,16 @@ const App = () => {
     dispatch(getIngredientsFromServer());
     dispatch(getOrdersFromServer());
     dispatch(checkAuth());
+
+    // Если пользователь откроет больше 1го окна - это позволит
+    // автоматически обновить или выкинуть пользователя в других окнах
+    // Прим.: событие происходит только в других окнах, а не в том
+    // что совершило изменение хранилища
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'refreshToken') {
+        dispatch(checkAuth());
+      }
+    });
   }, []);
 
   return (
@@ -105,14 +116,38 @@ const App = () => {
         />
 
         {/* Защищенные роуты: юзер залогинен */}
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/orders' element={<ProfileOrders />} />
+        <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
+        <Route
+          path='/profile/orders'
+          element={<OnlyAuth component={<ProfileOrders />} />}
+        />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <OnlyAuth
+              component={
+                <main className={styles.detailPageWrap}>
+                  <OrderInfo />
+                </main>
+              }
+            />
+          }
+        />
 
         {/* Защищенные роуты: залогиненный не должен попасть */}
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/reset-password' element={<ResetPassword />} />
+        <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
+        <Route
+          path='/register'
+          element={<OnlyUnAuth component={<Register />} />}
+        />
+        <Route
+          path='/forgot-password'
+          element={<OnlyUnAuth component={<ForgotPassword />} />}
+        />
+        <Route
+          path='/reset-password'
+          element={<OnlyUnAuth component={<ResetPassword />} />}
+        />
       </Routes>
 
       {backgroundLocation && (
@@ -138,9 +173,13 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal title={''} onClose={() => navigate(-1)}>
-                <OrderInfo />
-              </Modal>
+              <OnlyAuth
+                component={
+                  <Modal title={'Состав заказа'} onClose={() => navigate(-1)}>
+                    <OrderInfo />
+                  </Modal>
+                }
+              />
             }
           />
         </Routes>

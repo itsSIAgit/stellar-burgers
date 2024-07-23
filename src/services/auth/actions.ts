@@ -13,6 +13,13 @@ import {
   updateUserApi
 } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { deleteCookie, getCookie } from '../../utils/cookie';
+import {
+  setHaveAuthError,
+  setIsAuthChecked,
+  setIsAuthLoading,
+  setUser
+} from './authSlice';
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -38,36 +45,37 @@ export const logout = createAsyncThunk(
 );
 
 //Работает
+// Проверка учетки при загрузке приложения
 export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
-  async () => await getUserApi()
-  // async (_, { dispatch }) => {
-  //   console.log('== checkAuth ==');
-  //   console.log(getCookie('accessToken'));
+  async (_, { dispatch }) => {
+    dispatch(setIsAuthChecked(false));
 
-  //   if (getCookie('accessToken')) {
-  //     dispatch(setIsAuthLoading(true));
-  //     dispatch(setHaveAuthError(false));
-  //     await getUserApi()
-  //       .then((res) => dispatch(setUser(res.user)))
-  //       .catch(() => {
-  //         console.log('ERROR');
-  //         dispatch(setUser(null));
-  //         deleteCookie('accessToken');
-  //         localStorage.removeItem('refreshToken');
-  //       })
-  //       .finally(() => {
-  //         dispatch(setIsAuthLoading(false));
-  //         dispatch(setIsAuthChecked(true));
-  //       });
-  //   }
-  // }
+    if (getCookie('accessToken')) {
+      dispatch(setIsAuthLoading(true));
+      dispatch(setHaveAuthError(false));
+      await getUserApi()
+        .then((res) => dispatch(setUser(res.user)))
+        .catch(() => {
+          dispatch(setUser(null));
+          deleteCookie('accessToken');
+          localStorage.removeItem('refreshToken');
+        })
+        .finally(() => {
+          dispatch(setIsAuthLoading(false));
+          dispatch(setIsAuthChecked(true));
+        });
+    } else {
+      dispatch(setUser(null));
+      dispatch(setIsAuthChecked(true));
+    }
+  }
 );
 
-export const keepTokenActual = createAsyncThunk(
-  'auth/keepTokenActual',
-  async () => await refreshToken()
-);
+// export const keepTokenActual = createAsyncThunk(
+//   'auth/keepTokenActual',
+//   async () => await refreshToken()
+// );
 
 //Работает
 export const updateUser = createAsyncThunk(

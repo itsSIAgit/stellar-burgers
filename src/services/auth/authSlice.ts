@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { checkAuth, login, logout, register, updateUser } from './actions';
+import { login, logout, register, updateUser } from './actions';
 import { deleteCookie, setCookie } from '../../utils/cookie';
 
 type TAuth = {
@@ -23,49 +23,50 @@ export const authSlice = createSlice({
   reducers: {
     setHaveAuthError: (state, action: PayloadAction<boolean>) => {
       state.haveError = action.payload;
+    },
+    setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
+      state.isAuthChecked = action.payload;
+    },
+    setIsAuthLoading: (state, action: PayloadAction<boolean>) => {
+      state.isAuthChecked = action.payload;
+    },
+    setUser: (state, action: PayloadAction<TUser | null>) => {
+      state.user = action.payload;
     }
-    // setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
-    //   state.isAuthChecked = action.payload;
-    // },
-    // setIsAuthLoading: (state, action: PayloadAction<boolean>) => {
-    //   state.isAuthChecked = action.payload;
-    // },
-    // setUser: (state, action: PayloadAction<TUser | null>) => {
-    //   state.user = action.payload;
-    // }
   },
   selectors: {
     getHaveAuthError: (state) => state.haveError,
     getUserName: (state) => state.user?.name ?? '',
-    getUser: (state) => state.user ?? { email: '', name: '' }
+    getUser: (state) => state.user, //?? { email: '', name: '' },
+    getIsAuthChecked: (state) => state.isAuthChecked
   },
   extraReducers: (builder) => {
     builder
       //Проверка учетки при загрузке приложения
-      .addCase(checkAuth.pending, (state) => {
-        // console.log('PENDING-0');
-        state.isAuthChecked = false;
-        state.isLoading = true;
-        state.haveError = false;
-      })
-      .addCase(checkAuth.rejected, (state) => {
-        // console.log('REJECTED-0');
-        state.isLoading = false;
-        state.isAuthChecked = true;
-        state.user = null;
-        deleteCookie('accessToken');
-        localStorage.removeItem('refreshToken');
-      })
-      .addCase(checkAuth.fulfilled, (state, action) => {
-        // console.log('FULFILLED-0');
-        state.isLoading = false;
-        state.isAuthChecked = true;
-        if (action.payload.success) {
-          state.user = action.payload.user;
-        } else {
-          state.haveError = true;
-        }
-      })
+      // .addCase(checkAuth.pending, (state) => {
+      //   // console.log('PENDING-0');
+      //   state.isAuthChecked = false;
+      //   state.isLoading = true;
+      //   state.haveError = false;
+      // })
+      // .addCase(checkAuth.rejected, (state) => {
+      //   // console.log('REJECTED-0');
+      //   state.isLoading = false;
+      //   state.isAuthChecked = true;
+      //   state.user = null;
+      //   deleteCookie('accessToken');
+      //   localStorage.removeItem('refreshToken');
+      // })
+      // .addCase(checkAuth.fulfilled, (state, action) => {
+      //   // console.log('FULFILLED-0');
+      //   state.isLoading = false;
+      //   state.isAuthChecked = true;
+      //   if (action.payload.success) {
+      //     state.user = action.payload.user;
+      //   } else {
+      //     state.haveError = true;
+      //   }
+      // })
 
       // Регистрация нового пользователя
       .addCase(register.pending, (state) => {
@@ -160,7 +161,9 @@ export const authSlice = createSlice({
   }
 });
 
-export const { getHaveAuthError, getUserName, getUser } = authSlice.selectors;
-export const { setHaveAuthError } = authSlice.actions;
+export const { getHaveAuthError, getUserName, getUser, getIsAuthChecked } =
+  authSlice.selectors;
+export const { setHaveAuthError, setIsAuthChecked, setIsAuthLoading, setUser } =
+  authSlice.actions;
 
 export default authSlice.reducer;

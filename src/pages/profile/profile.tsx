@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from '../../services/store';
 import { updateUser } from '../../services/auth/actions';
 
 export const Profile: FC = () => {
-  const user = useSelector(getUser);
+  const user = useSelector(getUser) ?? { email: '', name: '' };
 
   const [formValue, setFormValue] = useState({
     name: user.name,
