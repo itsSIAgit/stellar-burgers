@@ -43,7 +43,6 @@ export const BurgerConstructor: FC = () => {
     if (orderRequest) return;
     if (!IsOrderError) {
       dispatch(getOrdersFromServer());
-      navigate('/profile/orders');
       dispatch(clearOrder());
       dispatch(clearModalData());
     }
