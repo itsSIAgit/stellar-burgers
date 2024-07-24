@@ -1,24 +1,52 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
+import { useDispatch, useSelector } from '../../services/store';
+import {
+  clearOrder,
+  getBurgerItems,
+  getOrderIngredients
+} from '../../services/burgerSlice';
+import {
+  clearModalData,
+  clearOrderError,
+  getIsOrderError,
+  getOrderModalData,
+  getOrderRequest,
+  orderBurger
+} from '../../services/userOrderSlice';
+import { Modal } from '@components';
+import { useNavigate } from 'react-router-dom';
+import { getOrdersFromServer } from '../../services/ordersSlice';
+import { getUser } from '../../services/auth/authSlice';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const constructorItems = {
-    bun: {
-      price: 0
-    },
-    ingredients: []
-  };
-
-  const orderRequest = false;
-
-  const orderModalData = null;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const orderRequest = useSelector(getOrderRequest);
+  const orderModalData = useSelector(getOrderModalData);
+  const constructorItems = useSelector(getBurgerItems);
+  const IsOrderError = useSelector(getIsOrderError);
+  const order = useSelector(getOrderIngredients);
+  const user = useSelector(getUser);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    dispatch(orderBurger(order));
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    if (orderRequest) return;
+    if (!IsOrderError) {
+      dispatch(getOrdersFromServer());
+      dispatch(clearOrder());
+      dispatch(clearModalData());
+    }
+  };
 
   const price = useMemo(
     () =>
@@ -30,16 +58,28 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
-  return null;
-
   return (
-    <BurgerConstructorUI
-      price={price}
-      orderRequest={orderRequest}
-      constructorItems={constructorItems}
-      orderModalData={orderModalData}
-      onOrderClick={onOrderClick}
-      closeOrderModal={closeOrderModal}
-    />
+    <>
+      {IsOrderError && (
+        <Modal
+          title={'Ошибка'}
+          onClose={() => {
+            dispatch(clearOrderError());
+          }}
+        >
+          <p>Заказ не удался.</p>
+          <p>Попробуйте позже...</p>
+        </Modal>
+      )}
+
+      <BurgerConstructorUI
+        price={price}
+        orderRequest={orderRequest}
+        constructorItems={constructorItems}
+        orderModalData={orderModalData}
+        onOrderClick={onOrderClick}
+        closeOrderModal={closeOrderModal}
+      />
+    </>
   );
 };
