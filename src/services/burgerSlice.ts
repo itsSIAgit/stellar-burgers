@@ -63,11 +63,20 @@ export const burgerSlice = createSlice({
     }
   },
   selectors: {
-    getBurgerItems: (state) => state
+    getBurgerItems: (state) => state,
+    getOrderIngredients: (state) => {
+      const order: string[] = [];
+      const bunId = state.bun?._id;
+      if (bunId) {
+        order.push(bunId, bunId);
+        state.ingredients.forEach((item) => order.push(item._id));
+      }
+      return order;
+    }
   }
 });
 
-export const { getBurgerItems } = burgerSlice.selectors;
+export const { getBurgerItems, getOrderIngredients } = burgerSlice.selectors;
 export const {
   addIngredient,
   ingredientMoveDown,

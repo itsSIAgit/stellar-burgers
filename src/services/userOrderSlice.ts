@@ -1,66 +1,60 @@
-/*
-import { getFeedsApi, getOrdersApi, orderBurgerApi } from '@api';
+import { getOrdersApi, orderBurgerApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { TOrdersData } from '@utils-types';
+import { TOrder } from '@utils-types';
 
-type TOrders = {
-  isOrdersError: boolean;
-  isOrdersLoading: boolean;
-  ordersData: TOrdersData;
+type TUserOrders = {
+  isUserOrdersError: boolean;
+  isUserOrdersLoading: boolean;
+  orderRequest: boolean;
+  orderModalData: TOrder | null;
+  userOrders: TOrder[];
 };
 
-const initialState: TOrders = {
-  isOrdersError: false,
-  isOrdersLoading: false,
-  ordersData: {
-    orders: [],
-    total: 0,
-    totalToday: 0
-  }
+const initialState: TUserOrders = {
+  isUserOrdersError: false,
+  isUserOrdersLoading: false,
+  orderRequest: false,
+  orderModalData: null,
+  userOrders: []
 };
 
 export const orderBurger = createAsyncThunk(
-  'auth/orderBurger',
+  'userOrders/orderBurger',
   async (ingredients: string[]) => await orderBurgerApi(ingredients)
 );
 
-export const getUserOrders = createAsyncThunk(
-  'auth/getUserOrders',
+export const getUserOrdersFromServer = createAsyncThunk(
+  'userOrders/getUserOrders',
   async () => await getOrdersApi()
 );
 
-export const ordersSlice = createSlice({
-  name: 'orders',
+export const userOrdersSlice = createSlice({
+  name: 'userOrders',
   initialState,
   reducers: {},
   selectors: {
-    getOrders: (state) => state.ordersData.orders,
-    getFeedInfo: (state) => ({
-      total: state.ordersData.total,
-      totalToday: state.ordersData.totalToday
-    }),
-    getIsOrdersLoading: (state) => state.isOrdersLoading,
-    getIsOrdersError: (state) => state.isOrdersError
+    getIsUserOrdersError: (state) => state.isUserOrdersError,
+    getIsUserOrdersLoading: (state) => state.isUserOrdersLoading,
+    getUserOrders: (state) => state.userOrders
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getOrdersFromServer.pending, (state) => {
-        state.isOrdersError = false;
-        state.isOrdersLoading = true;
+      .addCase(getUserOrdersFromServer.pending, (state) => {
+        state.isUserOrdersLoading = true;
+        state.isUserOrdersError = false;
       })
-      .addCase(getOrdersFromServer.rejected, (state) => {
-        state.isOrdersLoading = false;
-        state.isOrdersError = true;
+      .addCase(getUserOrdersFromServer.rejected, (state) => {
+        state.isUserOrdersLoading = false;
+        state.isUserOrdersError = true;
       })
-      .addCase(getOrdersFromServer.fulfilled, (state, action) => {
-        state.ordersData = action.payload;
-        state.isOrdersLoading = false;
+      .addCase(getUserOrdersFromServer.fulfilled, (state, action) => {
+        state.isUserOrdersLoading = false;
+        state.userOrders = action.payload;
       });
   }
 });
 
-export const { getIsOrdersError, getIsOrdersLoading, getOrders, getFeedInfo } =
-  ordersSlice.selectors;
+export const { getIsUserOrdersError, getIsUserOrdersLoading, getUserOrders } =
+  userOrdersSlice.selectors;
 
-export default ordersSlice.reducer;
-*/
+export default userOrdersSlice.reducer;

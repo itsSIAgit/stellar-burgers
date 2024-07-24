@@ -3,6 +3,7 @@ import ingredientsSliceReducer from './ingredientsSlice';
 import ordersSliceReducer from './ordersSlice';
 import burgerSliceReducer from './burgerSlice';
 import authSliceReducer from './auth/authSlice';
+import userOrdersSliceReducer from './userOrderSlice';
 
 import {
   TypedUseSelectorHook,
@@ -14,9 +15,9 @@ const rootReducer = combineReducers({
   ingredients: ingredientsSliceReducer,
   orders: ordersSliceReducer,
   burger: burgerSliceReducer,
-  auth: authSliceReducer
+  auth: authSliceReducer,
+  userOrders: userOrdersSliceReducer
 });
-// Заменить на импорт настоящего редьюсера
 
 const store = configureStore({
   reducer: rootReducer,
