@@ -66,7 +66,7 @@ const App = () => {
 
       {/* Покажем критическую ошибку, при которой
           позволять пользователю дальше тыкать не стоит */}
-      {haveErrorLoading ? (
+      {haveErrorLoading && (
         <Modal
           title={'Ошибка'}
           onClose={() => {
@@ -76,11 +76,11 @@ const App = () => {
           <p>Важные данные загрузить не удалось.</p>
           <p>Попробуйте перезагрузить страницу.</p>
         </Modal>
-      ) : null}
+      )}
 
       {/* Покажем уведомление об ошибке auth и сбросим,
           чтобы показать один раз, и позволить пользователю дальше тыкать */}
-      {haveAuthError ? (
+      {haveAuthError && (
         <Modal
           title={'Ошибка'}
           onClose={() => {
@@ -90,7 +90,7 @@ const App = () => {
           <p>Операция не удалась.</p>
           <p>Попробуйте снова.</p>
         </Modal>
-      ) : null}
+      )}
 
       <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />

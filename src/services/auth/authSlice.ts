@@ -35,7 +35,7 @@ export const authSlice = createSlice({
   selectors: {
     getHaveAuthError: (state) => state.haveError,
     getUserName: (state) => state.user?.name ?? '',
-    getUser: (state) => state.user, //?? { email: '', name: '' },
+    getUser: (state) => state.user,
     getIsAuthChecked: (state) => state.isAuthChecked
   },
   extraReducers: (builder) => {

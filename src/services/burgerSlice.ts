@@ -60,6 +60,10 @@ export const burgerSlice = createSlice({
       if (ingIndex > -1) {
         ings.splice(ingIndex, 1);
       }
+    },
+    clearOrder: (state) => {
+      state.bun = null;
+      state.ingredients = [];
     }
   },
   selectors: {
@@ -68,8 +72,9 @@ export const burgerSlice = createSlice({
       const order: string[] = [];
       const bunId = state.bun?._id;
       if (bunId) {
-        order.push(bunId, bunId);
+        order.push(bunId);
         state.ingredients.forEach((item) => order.push(item._id));
+        order.push(bunId);
       }
       return order;
     }
@@ -81,7 +86,8 @@ export const {
   addIngredient,
   ingredientMoveDown,
   ingredientMoveUp,
-  ingredientDelete
+  ingredientDelete,
+  clearOrder
 } = burgerSlice.actions;
 
 export default burgerSlice.reducer;

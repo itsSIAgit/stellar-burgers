@@ -7,6 +7,7 @@ type TUserOrders = {
   isUserOrdersLoading: boolean;
   orderRequest: boolean;
   orderModalData: TOrder | null;
+  isOrderError: boolean;
   userOrders: TOrder[];
 };
 
@@ -15,6 +16,7 @@ const initialState: TUserOrders = {
   isUserOrdersLoading: false,
   orderRequest: false,
   orderModalData: null,
+  isOrderError: false,
   userOrders: []
 };
 
@@ -31,14 +33,38 @@ export const getUserOrdersFromServer = createAsyncThunk(
 export const userOrdersSlice = createSlice({
   name: 'userOrders',
   initialState,
-  reducers: {},
+  reducers: {
+    clearOrderError: (state) => {
+      state.isOrderError = false;
+    },
+    clearModalData: (state) => {
+      state.orderModalData = null;
+    }
+  },
   selectors: {
     getIsUserOrdersError: (state) => state.isUserOrdersError,
     getIsUserOrdersLoading: (state) => state.isUserOrdersLoading,
-    getUserOrders: (state) => state.userOrders
+    getUserOrders: (state) => state.userOrders,
+    getOrderRequest: (state) => state.orderRequest,
+    getOrderModalData: (state) => state.orderModalData,
+    getIsOrderError: (state) => state.isOrderError
   },
   extraReducers: (builder) => {
     builder
+      .addCase(orderBurger.pending, (state) => {
+        state.orderRequest = true;
+        state.isOrderError = false;
+        state.orderModalData = null;
+      })
+      .addCase(orderBurger.rejected, (state) => {
+        state.orderRequest = false;
+        state.isOrderError = true;
+      })
+      .addCase(orderBurger.fulfilled, (state, action) => {
+        state.orderRequest = false;
+        state.orderModalData = action.payload.order;
+      })
+
       .addCase(getUserOrdersFromServer.pending, (state) => {
         state.isUserOrdersLoading = true;
         state.isUserOrdersError = false;
@@ -54,7 +80,14 @@ export const userOrdersSlice = createSlice({
   }
 });
 
-export const { getIsUserOrdersError, getIsUserOrdersLoading, getUserOrders } =
-  userOrdersSlice.selectors;
+export const {
+  getIsUserOrdersError,
+  getIsUserOrdersLoading,
+  getUserOrders,
+  getOrderRequest,
+  getOrderModalData,
+  getIsOrderError
+} = userOrdersSlice.selectors;
+export const { clearOrderError, clearModalData } = userOrdersSlice.actions;
 
 export default userOrdersSlice.reducer;
