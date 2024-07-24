@@ -38,6 +38,7 @@ export const BurgerConstructor: FC = () => {
     }
     dispatch(orderBurger(order));
   };
+
   const closeOrderModal = () => {
     if (orderRequest) return;
     if (!IsOrderError) {

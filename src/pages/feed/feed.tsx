@@ -13,6 +13,7 @@ export const Feed: FC = () => {
   const isOrdersLoading: boolean = useSelector(getIsOrdersLoading);
   const orders: TOrder[] = useSelector(getOrders);
   const dispatch = useDispatch();
+
   const handleGetFeeds = () => dispatch(getOrdersFromServer());
 
   return (
