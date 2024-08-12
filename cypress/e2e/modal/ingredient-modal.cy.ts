@@ -1,4 +1,8 @@
 describe('Проверяем работу модального окна ингридиента', function() {
+  beforeEach(() => {
+    cy.visit('http://localhost:4000');
+  });
+  
   it('Открытие модалки с проверкой содержимого (соло)', function() {
     const item = cy.get('[data-cy="643d69a5c3f7b9001cfa093c"]')
     item.click();

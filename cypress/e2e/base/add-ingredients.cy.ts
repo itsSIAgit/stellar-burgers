@@ -1,4 +1,8 @@
 describe('Проверяем добавления ингредиентов', function() {
+  beforeEach(() => {
+    cy.visit('http://localhost:4000');
+  });
+
   it('Булки добавляются (соло)', function() {
     cy.get('[data-cy="643d69a5c3f7b9001cfa093c"]').contains('Добавить').click();
     cy.get('[data-cy="constructorBunTop"]').contains('Краторная булка N-200i');
@@ -27,6 +31,6 @@ describe('Проверяем добавления ингредиентов', fun
 
     cy.get('[data-cy="BurgerConstructorElements"]').contains('Соус Spicy-X');
 
-    cy.get('[data-cy="BurgerConstructor"]').contains('3024');
+    cy.get('[data-cy="BurgerConstructorPrice"]').contains('3024');
   });
 });

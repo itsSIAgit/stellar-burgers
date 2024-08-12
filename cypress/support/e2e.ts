@@ -19,14 +19,7 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-before(() => {
-  //для сброса кеша, чтобы стабильно работал intercept
-  cy.visit('http://localhost:4000');
-  cy.reload(true);
-})
-
 beforeEach(() => {
   cy.intercept('GET', '*/ingredients', { fixture: 'ingredients.json' });
   cy.intercept('GET', 'https://code.s3.yandex.net/react/code/*.png', { fixture: 'images/placeholder.png' });
-  cy.visit('http://localhost:4000');
 });

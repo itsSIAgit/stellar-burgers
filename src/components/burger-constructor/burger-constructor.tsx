@@ -17,7 +17,6 @@ import {
 } from '../../services/userOrderSlice';
 import { Modal } from '@components';
 import { useNavigate } from 'react-router-dom';
-import { getOrdersFromServer } from '../../services/ordersSlice';
 import { getUser } from '../../services/auth/authSlice';
 
 export const BurgerConstructor: FC = () => {
@@ -42,7 +41,6 @@ export const BurgerConstructor: FC = () => {
   const closeOrderModal = () => {
     if (orderRequest) return;
     if (!IsOrderError) {
-      dispatch(getOrdersFromServer());
       dispatch(clearOrder());
       dispatch(clearModalData());
     }
