@@ -29,6 +29,4 @@ describe('Проверяем добавления ингредиентов', fun
 
     cy.get('[data-cy="BurgerConstructor"]').contains('3024');
   });
-  
 });
-
