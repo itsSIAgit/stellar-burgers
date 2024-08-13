@@ -210,3 +210,26 @@ export const ingredientsTestData = [
       "__v": 0
   }
 ];
+
+export const rootReducerInitialStateTestData = {
+  ingredients: {
+    isIngredientsError: false,
+    isIngredientsLoading: false,
+    ingredients: []
+  },
+  orders: {
+    isOrdersError: false,
+    isOrdersLoading: false,
+    ordersData: { orders: [], total: 0, totalToday: 0 }
+  },
+  burger: { bun: null, ingredients: [] },
+  auth: { haveError: false, isAuthChecked: false, user: null },
+  userOrders: {
+    isUserOrdersError: false,
+    isUserOrdersLoading: false,
+    orderRequest: false,
+    orderModalData: null,
+    isOrderError: false,
+    userOrders: []
+  }
+};
