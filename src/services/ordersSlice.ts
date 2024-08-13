@@ -47,7 +47,9 @@ export const ordersSlice = createSlice({
         state.isOrdersError = true;
       })
       .addCase(getOrdersFromServer.fulfilled, (state, action) => {
-        state.ordersData = action.payload;
+        state.ordersData.orders = action.payload.orders;
+        state.ordersData.total = action.payload.total;
+        state.ordersData.totalToday = action.payload.totalToday;
         state.isOrdersLoading = false;
       });
   }
