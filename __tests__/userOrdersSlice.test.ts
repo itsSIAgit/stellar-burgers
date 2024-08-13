@@ -1,6 +1,6 @@
 import { expect, test, describe } from '@jest/globals';
 import { orderResponseTestData, userOrdersResponseTestData } from './testData';
-import userOrdersSliceReducer, { getUserOrdersFromServer, orderBurger } from '../src/services/userOrderSlice';
+import userOrdersSliceReducer, { clearModalData, clearOrderError, getUserOrdersFromServer, orderBurger } from '../src/services/userOrderSlice';
 
 describe('Тестируем userOrdersSlice', () => {
   const initialState = {
@@ -11,6 +11,27 @@ describe('Тестируем userOrdersSlice', () => {
     isOrderError: false,
     userOrders: []
   };
+
+  describe('Тестируем основные редьюсеры', () => {
+    test('[clearOrderError] Очищаем state от ошибки отправки заказа', () => {
+      const state = userOrdersSliceReducer({ ...initialState, isOrderError: true }, clearOrderError());
+      expect(state.isOrderError).toBe(false);
+    });
+
+    test('[clearModalData] Очищаем state от ошибки отправки заказа', () => {
+      const order = {
+        _id: '1',
+        status: '1',
+        name: '1',
+        createdAt: '1',
+        updatedAt: '1',
+        number: 123,
+        ingredients: ['1', '2', '3']
+      }
+      const state = userOrdersSliceReducer({ ...initialState, orderModalData: order }, clearModalData());
+      expect(state.orderModalData).toBeNull();
+    });
+  });
 
   describe('[getUserOrdersFromServer] Тестируем запрос списка заказов пользователя', () => {
     test('Запрос отправлен', () => {
