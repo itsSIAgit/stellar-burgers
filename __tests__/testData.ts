@@ -888,3 +888,337 @@ export const feedsResponseTestData = {
   "total": 49206,
   "totalToday": 93
 }
+
+export const userOrdersResponseTestData = {
+	"success": true,
+	"orders": [
+		{
+			"_id": "66a06fa9119d45001b4fb37c",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa093e"
+			],
+			"status": "done",
+			"name": "Флюоресцентный люминесцентный бургер",
+			"createdAt": "2024-07-24T03:06:17.544Z",
+			"updatedAt": "2024-07-24T03:06:17.995Z",
+			"number": 47112
+		},
+		{
+			"_id": "66a07005119d45001b4fb37d",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa0941"
+			],
+			"status": "done",
+			"name": "Краторный био-марсианский бургер",
+			"createdAt": "2024-07-24T03:07:49.621Z",
+			"updatedAt": "2024-07-24T03:07:50.097Z",
+			"number": 47113
+		},
+		{
+			"_id": "66a07166119d45001b4fb37e",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa093f"
+			],
+			"status": "done",
+			"name": "Краторный бессмертный бургер",
+			"createdAt": "2024-07-24T03:13:43.000Z",
+			"updatedAt": "2024-07-24T03:13:43.579Z",
+			"number": 47114
+		},
+		{
+			"_id": "66a072f2119d45001b4fb380",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa0947",
+				"643d69a5c3f7b9001cfa0946"
+			],
+			"status": "done",
+			"name": "Краторный минеральный фалленианский бургер",
+			"createdAt": "2024-07-24T03:20:18.068Z",
+			"updatedAt": "2024-07-24T03:20:18.529Z",
+			"number": 47115
+		},
+		{
+			"_id": "66a07426119d45001b4fb384",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa0947",
+				"643d69a5c3f7b9001cfa0940",
+				"643d69a5c3f7b9001cfa093c"
+			],
+			"status": "done",
+			"name": "Фалленианский краторный бессмертный минеральный метеоритный бургер",
+			"createdAt": "2024-07-24T03:25:26.760Z",
+			"updatedAt": "2024-07-24T03:25:27.199Z",
+			"number": 47116
+		},
+		{
+			"_id": "66a0765f119d45001b4fb38b",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa093d"
+			],
+			"status": "done",
+			"name": "Флюоресцентный бессмертный бургер",
+			"createdAt": "2024-07-24T03:34:55.710Z",
+			"updatedAt": "2024-07-24T03:34:56.134Z",
+			"number": 47117
+		},
+		{
+			"_id": "66a0778b119d45001b4fb38d",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa093d"
+			],
+			"status": "done",
+			"name": "Флюоресцентный минеральный бургер",
+			"createdAt": "2024-07-24T03:39:55.232Z",
+			"updatedAt": "2024-07-24T03:39:55.719Z",
+			"number": 47118
+		},
+		{
+			"_id": "66a077c7119d45001b4fb38e",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa093d"
+			],
+			"status": "done",
+			"name": "Флюоресцентный бессмертный бургер",
+			"createdAt": "2024-07-24T03:40:55.088Z",
+			"updatedAt": "2024-07-24T03:40:55.533Z",
+			"number": 47119
+		},
+		{
+			"_id": "66a07cc2119d45001b4fb393",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa0941",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa0940",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa0947",
+				"643d69a5c3f7b9001cfa0948",
+				"643d69a5c3f7b9001cfa0949",
+				"643d69a5c3f7b9001cfa094a",
+				"643d69a5c3f7b9001cfa0942",
+				"643d69a5c3f7b9001cfa0943",
+				"643d69a5c3f7b9001cfa0945",
+				"643d69a5c3f7b9001cfa0944",
+				"643d69a5c3f7b9001cfa093c"
+			],
+			"status": "done",
+			"name": "Антарианский space астероидный фалленианский краторный люминесцентный бессмертный минеральный альфа-сахаридный экзо-плантаго традиционный-галактический spicy био-марсианский метеоритный бургер",
+			"createdAt": "2024-07-24T04:02:10.771Z",
+			"updatedAt": "2024-07-24T04:02:11.216Z",
+			"number": 47120
+		},
+		{
+			"_id": "66a07f50119d45001b4fb397",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa093d"
+			],
+			"status": "done",
+			"name": "Флюоресцентный люминесцентный бургер",
+			"createdAt": "2024-07-24T04:13:04.992Z",
+			"updatedAt": "2024-07-24T04:13:05.410Z",
+			"number": 47121
+		},
+		{
+			"_id": "66a09133119d45001b4fb3b4",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa094a",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa0947",
+				"643d69a5c3f7b9001cfa093c"
+			],
+			"status": "done",
+			"name": "Астероидный фалленианский краторный минеральный люминесцентный бургер",
+			"createdAt": "2024-07-24T05:29:23.737Z",
+			"updatedAt": "2024-07-24T05:29:24.188Z",
+			"number": 47123
+		},
+		{
+			"_id": "66a0a359119d45001b4fb3e0",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa093d"
+			],
+			"status": "done",
+			"name": "Флюоресцентный минеральный люминесцентный бессмертный бургер",
+			"createdAt": "2024-07-24T06:46:49.989Z",
+			"updatedAt": "2024-07-24T06:46:50.493Z",
+			"number": 47129
+		},
+		{
+			"_id": "66a0a3a3119d45001b4fb3e1",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093d",
+				"643d69a5c3f7b9001cfa0941",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa0940",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa0947",
+				"643d69a5c3f7b9001cfa0948",
+				"643d69a5c3f7b9001cfa0949",
+				"643d69a5c3f7b9001cfa094a",
+				"643d69a5c3f7b9001cfa0942",
+				"643d69a5c3f7b9001cfa0943",
+				"643d69a5c3f7b9001cfa0944",
+				"643d69a5c3f7b9001cfa0945",
+				"643d69a5c3f7b9001cfa0941",
+				"643d69a5c3f7b9001cfa093e",
+				"643d69a5c3f7b9001cfa093f",
+				"643d69a5c3f7b9001cfa0940",
+				"643d69a5c3f7b9001cfa0946",
+				"643d69a5c3f7b9001cfa0947",
+				"643d69a5c3f7b9001cfa0948",
+				"643d69a5c3f7b9001cfa0949",
+				"643d69a5c3f7b9001cfa094a",
+				"643d69a5c3f7b9001cfa0942",
+				"643d69a5c3f7b9001cfa0943",
+				"643d69a5c3f7b9001cfa0944",
+				"643d69a5c3f7b9001cfa0945",
+				"643d69a5c3f7b9001cfa093d"
+			],
+			"status": "done",
+			"name": "Флюоресцентный антарианский space астероидный фалленианский люминесцентный бессмертный минеральный альфа-сахаридный экзо-плантаго традиционный-галактический spicy био-марсианский метеоритный бургер",
+			"createdAt": "2024-07-24T06:48:03.983Z",
+			"updatedAt": "2024-07-24T06:48:04.507Z",
+			"number": 47130
+		},
+		{
+			"_id": "66ba6162119d45001b4ff603",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa0941",
+				"643d69a5c3f7b9001cfa093c"
+			],
+			"status": "done",
+			"name": "Краторный био-марсианский бургер",
+			"createdAt": "2024-08-12T19:24:18.744Z",
+			"updatedAt": "2024-08-12T19:24:19.224Z",
+			"number": 49496
+		},
+		{
+			"_id": "66ba61f5119d45001b4ff605",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa0941",
+				"643d69a5c3f7b9001cfa0942",
+				"643d69a5c3f7b9001cfa093c"
+			],
+			"status": "done",
+			"name": "Краторный spicy био-марсианский бургер",
+			"createdAt": "2024-08-12T19:26:45.284Z",
+			"updatedAt": "2024-08-12T19:26:45.795Z",
+			"number": 49498
+		},
+		{
+			"_id": "66ba66f2119d45001b4ff614",
+			"ingredients": [
+				"643d69a5c3f7b9001cfa093c",
+				"643d69a5c3f7b9001cfa0941",
+				"643d69a5c3f7b9001cfa0942",
+				"643d69a5c3f7b9001cfa093c"
+			],
+			"status": "done",
+			"name": "Краторный spicy био-марсианский бургер",
+			"createdAt": "2024-08-12T19:48:02.214Z",
+			"updatedAt": "2024-08-12T19:48:02.684Z",
+			"number": 49505
+		}
+	],
+	"total": 49207,
+	"totalToday": 91
+}
+
+export const orderResponseTestData = {
+	"success": true,
+	"name": "Краторный минеральный бургер",
+	"order": {
+		"ingredients": [
+			{
+				"_id": "643d69a5c3f7b9001cfa093c",
+				"name": "Краторная булка N-200i",
+				"type": "bun",
+				"proteins": 80,
+				"fat": 24,
+				"carbohydrates": 53,
+				"calories": 420,
+				"price": 1255,
+				"image": "https://code.s3.yandex.net/react/code/bun-02.png",
+				"image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+				"image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
+				"__v": 0
+			},
+			{
+				"_id": "643d69a5c3f7b9001cfa0946",
+				"name": "Хрустящие минеральные кольца",
+				"type": "main",
+				"proteins": 808,
+				"fat": 689,
+				"carbohydrates": 609,
+				"calories": 986,
+				"price": 300,
+				"image": "https://code.s3.yandex.net/react/code/mineral_rings.png",
+				"image_mobile": "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
+				"image_large": "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
+				"__v": 0
+			},
+			{
+				"_id": "643d69a5c3f7b9001cfa093c",
+				"name": "Краторная булка N-200i",
+				"type": "bun",
+				"proteins": 80,
+				"fat": 24,
+				"carbohydrates": 53,
+				"calories": 420,
+				"price": 1255,
+				"image": "https://code.s3.yandex.net/react/code/bun-02.png",
+				"image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+				"image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png",
+				"__v": 0
+			}
+		],
+		"_id": "66bb9d9c119d45001b4ff7fb",
+		"owner": {
+			"name": "TEST",
+			"email": "TEST@yandex.ru",
+			"createdAt": "2024-07-23T03:25:20.725Z",
+			"updatedAt": "2024-07-24T04:00:54.462Z"
+		},
+		"status": "done",
+		"name": "Краторный минеральный бургер",
+		"createdAt": "2024-08-13T17:53:32.846Z",
+		"updatedAt": "2024-08-13T17:53:33.337Z",
+		"number": 49582,
+		"price": 2810
+	}
+}
