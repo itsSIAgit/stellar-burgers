@@ -46,7 +46,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getIngredientsFromServer());
-    dispatch(getOrdersFromServer());
     dispatch(checkAuth());
 
     // Если пользователь откроет больше 1го окна - это позволит
