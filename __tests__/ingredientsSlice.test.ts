@@ -1,14 +1,8 @@
 import { expect, test, describe } from '@jest/globals';
 import { ingredientsTestData } from './testData';
-import ingredientsSliceReducer, { getIngredientsFromServer } from '../src/services/ingredientsSlice';
+import ingredientsSliceReducer, { getIngredientsFromServer, initialState } from '../src/services/ingredientsSlice';
 
 describe('Тестируем ingredientsSlice', () => {
-  const initialState = {
-    isIngredientsError: false,
-    isIngredientsLoading: false,
-    ingredients: []
-  };
-  
   test('[getIngredientsFromServer] Запрос ингридиентов отправлен', () => {
     const action = { type: getIngredientsFromServer.pending.type };
     const state = ingredientsSliceReducer(initialState, action);

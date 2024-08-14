@@ -35,3 +35,35 @@
 //     }
 //   }
 // }
+
+declare namespace Cypress {
+  interface Chainable {
+    doModalClicks(items: string[]): void;
+  }
+};
+
+Cypress.Commands.add('doModalClicks', (items) => {
+  items.forEach((item, index) => {
+    const unit = cy.get(item);
+    unit.click();
+
+    if (!index) {
+      cy.get('[data-cy="modal"]').as('modal').should('exist');
+      cy.get('[data-cy="modal-close-btn"]').as('closeBtn').should('exist');
+      cy.get('[data-cy="modal-overlay"]').as('overlay').should('exist');
+    }
+
+    cy.get('@closeBtn').click();
+    cy.get('@modal').should('not.exist');
+    
+    unit.click();
+    cy.get('@modal').should('exist');
+    cy.get('@overlay').click('topLeft', { force: true });
+    cy.get('@modal').should('not.exist');
+    
+    unit.click();
+    cy.get('@modal').should('exist');
+    cy.get('body').type('{esc}');
+    cy.get('@modal').should('not.exist');
+  });
+});

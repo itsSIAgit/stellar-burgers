@@ -25,7 +25,10 @@ describe('Формируем заказ', function() {
       }
     });
 
-    cy.visit('http://localhost:4000');
+    cy.visit('/');
+    cy.get('[data-cy="constructorBunTop"]').as('burgerTopInfo');
+    cy.get('[data-cy="constructorBunBottom"]').as('burgerBottomInfo');
+    cy.get('[data-cy="BurgerConstructorElements"]').as('burgerMiddleInfo');
   });
 
   after(() => {
@@ -54,20 +57,20 @@ describe('Формируем заказ', function() {
       item.contains('Добавить').click();
     });
 
-    const orderBtn = cy.get('[data-cy="BurgerConstructorOrder"]').contains('Оформить заказ');
-    orderBtn.click();
+    cy.get('[data-cy="BurgerConstructorOrder"]').contains('Оформить заказ').as('orderBtn');
+    cy.get('@orderBtn').click();
 
-    const modal = cy.get('[data-cy="modal"]');
-    modal.should('exist');
-    modal.get('[data-cy="modal-children"]').contains('идентификатор заказа');
-    modal.get('[data-cy="modal-children"]').contains('49498');
+    cy.get('[data-cy="modal"]').as('modal');
+    cy.get('@modal').get('[data-cy="modal-children"]').as('children');
+    cy.get('@children').contains('идентификатор заказа');
+    cy.get('@children').contains('49498');
 
     cy.get('[data-cy="modal-close-btn"]').click();
-    cy.get('[data-cy="modal"]').should('not.exist');
+    cy.get('@modal').should('not.exist');
 
-    cy.get('[data-cy="constructorBunTop"]').contains('Выберите булки');
-    cy.get('[data-cy="constructorBunBottom"]').contains('Выберите булки');
-    cy.get('[data-cy="BurgerConstructorElements"]').contains('Выберите начинку');
+    cy.get('@burgerTopInfo').contains('Выберите булки');
+    cy.get('@burgerBottomInfo').contains('Выберите булки');
+    cy.get('@burgerMiddleInfo').contains('Выберите начинку');
   });
 });
 

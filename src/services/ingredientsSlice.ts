@@ -8,7 +8,7 @@ type TIngredientsData = {
   ingredients: TIngredient[];
 };
 
-const initialState: TIngredientsData = {
+export const initialState: TIngredientsData = {
   isIngredientsError: false,
   isIngredientsLoading: false,
   ingredients: []

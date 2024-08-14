@@ -1,15 +1,11 @@
 import { expect, test, describe } from '@jest/globals';
 import { configureStore } from '@reduxjs/toolkit';
 import { ingredientsTestData } from './testData';
-import burgerSliceReducer, { addIngredient, clearOrder, ingredientDelete, ingredientMoveDown, ingredientMoveUp } from '../src/services/burgerSlice';
+import burgerSliceReducer, { addIngredient, clearOrder, ingredientDelete, ingredientMoveDown, ingredientMoveUp, initialState } from '../src/services/burgerSlice';
 
 describe('Тестируем burgerSlice', () => {
   describe('Базовые функции', () => {
     test('[addIngredient] Добавить ингридиент: булка', () => {
-        const initialState = {
-          bun: null,
-          ingredients: []
-        };
       const { bun } = burgerSliceReducer(initialState, addIngredient(ingredientsTestData[0]));
       
       expect(bun).not.toBeNull();
@@ -20,10 +16,6 @@ describe('Тестируем burgerSlice', () => {
     });
     
     test('[addIngredient] Добавить ингридиент: мясо', () => {
-      const initialState = {
-        bun: null,
-        ingredients: []
-      };
       const { ingredients } = burgerSliceReducer(initialState, addIngredient(ingredientsTestData[1]));
       
       expect(ingredients[0].id).toBeDefined();

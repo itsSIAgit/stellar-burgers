@@ -11,7 +11,7 @@ type TUserOrders = {
   userOrders: TOrder[];
 };
 
-const initialState: TUserOrders = {
+export const initialState: TUserOrders = {
   isUserOrdersError: false,
   isUserOrdersLoading: false,
   orderRequest: false,

@@ -1,18 +1,8 @@
 import { expect, test, describe } from '@jest/globals';
 import { feedsResponseTestData } from './testData';
-import ordersSliceReducer, { getOrdersFromServer } from '../src/services/ordersSlice';
+import ordersSliceReducer, { getOrdersFromServer, initialState } from '../src/services/ordersSlice';
 
 describe('Тестируем ordersSlice', () => {
-  const initialState = {
-    isOrdersError: false,
-    isOrdersLoading: false,
-    ordersData: {
-      orders: [],
-      total: 0,
-      totalToday: 0
-    }
-  };
-  
   test('[getOrdersFromServer] Запрос общего списка заказов отправлен', () => {
     const action = { type: getOrdersFromServer.pending.type };
     const state = ordersSliceReducer(initialState, action);
